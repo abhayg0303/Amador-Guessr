@@ -38,7 +38,7 @@ public class GameGUI {
     }
 
     private void loadLocations() { //MAKE SURE TO ADD THE NAME OF THE WEB FILE 
-        locations.add(new Location("Library", ));
+        locations.add(new Location("Science Bulding", Amador-Science.jpg));
         locations.add(new Location("Cafeteria", ));
         locations.add(new Location("Gym", ));
         locations.add(new Location("Quad", ));
