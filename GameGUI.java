@@ -46,7 +46,7 @@ public class GameGUI {
     private void loadLocations() {
         // Replace these paths with actual image paths
         locations.add(new Location("Science Building", "images/Amador-Science.jpg"));
-        locations.add(new Location("Cafeteria", "images/Cafeteria.jpg"));
+        locations.add(new Location("Football Field", "images/"));
         locations.add(new Location("Gym", "images/Gym.jpg"));
         locations.add(new Location("Quad", "images/Quad.jpg"));
         locations.add(new Location("Front Office", "images/FrontOffice.jpg"));
