@@ -16,6 +16,7 @@ public class GameGUI {
         Collections.shuffle(locations);
     }
 
+    //this sets up GUI
     public void startGame() {
         frame = new JFrame("Amador Valley GeoGuessr");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -38,13 +39,14 @@ public class GameGUI {
     }
 
     private void loadLocations() { //MAKE SURE TO ADD THE NAME OF THE WEB FILE 
-        locations.add(new Location("Science Bulding", Amador-Science.jpg));
-        locations.add(new Location("Cafeteria", ));
+        locations.add(new Location("Science Bulding", "images/Amador-Science.jpg"));
+        locations.add(new Location("Football Field", "images/Football Field.jpg" ));
         locations.add(new Location("Gym", ));
         locations.add(new Location("Quad", ));
         locations.add(new Location("Front Office", ));
     }
 
+    //ends if max rounds are reached; random location selection
     private void nextRound() {
         if (round >= totalRounds) {
             showFinalScore();
@@ -56,6 +58,7 @@ public class GameGUI {
         displayImage(currentLocation.getImagePath());
         setupChoices();
     }
+    //loads and scales the image to make it bigger/smaller
 
     private void displayImage(String path) {
         ImageIcon icon = new ImageIcon(path);
@@ -63,6 +66,7 @@ public class GameGUI {
         imageLabel.setIcon(new ImageIcon(scaledImage));
     }
 
+    // this is how we create buttons for the player to use
     private void setupChoices() {
         buttonsPanel.removeAll();
         feedbackLabel.setText("Round " + round + ": Where is this?");
@@ -80,8 +84,9 @@ public class GameGUI {
         frame.repaint();
     }
 
+    //checks if the person guesses correctly 
     private void handleGuess(Location guess) {
-        if (guess.getName().equals(currentLocation.getName())) {
+        if (guess.getName().equals(currentLocation.getName())) 
             score++;
             feedbackLabel.setText("Correct!");
         } else {
@@ -97,4 +102,5 @@ public class GameGUI {
         JOptionPane.showMessageDialog(frame, "Game Over! You scored " + score + " out of " + totalRounds);
         frame.dispose();
     }
+    aaaaaa
 }
