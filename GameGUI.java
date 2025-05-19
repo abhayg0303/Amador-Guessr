@@ -1,9 +1,15 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.*;
+
 public class GameGUI {
     private final List<Location> locations;
     private Location currentLocation;
     private int score = 0;
     private int round = 0;
     private final int totalRounds = 5;
+    private boolean hasGuessed = false;
 
     private JFrame frame;
     private JLabel imageLabel;
@@ -16,7 +22,6 @@ public class GameGUI {
         Collections.shuffle(locations);
     }
 
-    //this sets up GUI
     public void startGame() {
         frame = new JFrame("Amador Valley GeoGuessr");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -38,39 +43,40 @@ public class GameGUI {
         frame.setVisible(true);
     }
 
-    private void loadLocations() { //MAKE SURE TO ADD THE NAME OF THE WEB FILE 
-        locations.add(new Location("Science Bulding", "images/Amador-Science.jpg"));
-        locations.add(new Location("Football Field", "images/Football Field.jpg" ));
-        locations.add(new Location("Gym", ));
-        locations.add(new Location("Quad", ));
-        locations.add(new Location("Front Office", ));
+    private void loadLocations() {
+        // Replace these paths with actual image paths
+        locations.add(new Location("Science Building", "images/Amador-Science.jpg"));
+        locations.add(new Location("Cafeteria", "images/Cafeteria.jpg"));
+        locations.add(new Location("Gym", "images/Gym.jpg"));
+        locations.add(new Location("Quad", "images/Quad.jpg"));
+        locations.add(new Location("Front Office", "images/FrontOffice.jpg"));
     }
 
-    //ends if max rounds are reached; random location selection
     private void nextRound() {
         if (round >= totalRounds) {
             showFinalScore();
             return;
         }
 
+        hasGuessed = false;
         round++;
+
         currentLocation = locations.get(new Random().nextInt(locations.size()));
         displayImage(currentLocation.getImagePath());
         setupChoices();
+
+        feedbackLabel.setText("Round " + round + ": Where is this?");
     }
-    //loads and scales the image to make it bigger/smaller
 
     private void displayImage(String path) {
         ImageIcon icon = new ImageIcon(path);
         Image scaledImage = icon.getImage().getScaledInstance(500, 300, Image.SCALE_SMOOTH);
         imageLabel.setIcon(new ImageIcon(scaledImage));
+        imageLabel.setCursor(Cursor.getDefaultCursor());
     }
 
-    // this is how we create buttons for the player to use
     private void setupChoices() {
         buttonsPanel.removeAll();
-        feedbackLabel.setText("Round " + round + ": Where is this?");
-
         List<Location> shuffledChoices = new ArrayList<>(locations);
         Collections.shuffle(shuffledChoices);
 
@@ -84,23 +90,44 @@ public class GameGUI {
         frame.repaint();
     }
 
-    //checks if the person guesses correctly 
     private void handleGuess(Location guess) {
-        if (guess.getName().equals(currentLocation.getName())) 
+        if (hasGuessed) return;
+        hasGuessed = true;
+
+        if (guess.getName().equals(currentLocation.getName())) {
             score++;
             feedbackLabel.setText("Correct!");
         } else {
             feedbackLabel.setText("Wrong! It was: " + currentLocation.getName());
         }
 
-        Timer timer = new Timer(1500, e -> nextRound());
-        timer.setRepeats(false);
-        timer.start();
+        for (Component comp : buttonsPanel.getComponents()) {
+            if (comp instanceof JButton) {
+                comp.setEnabled(false);
+            }
+        }
+
+        imageLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        imageLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                imageLabel.setCursor(Cursor.getDefaultCursor());
+                imageLabel.removeMouseListener(this);
+                nextRound();
+            }
+        });
     }
 
     private void showFinalScore() {
-        JOptionPane.showMessageDialog(frame, "Game Over! You scored " + score + " out of " + totalRounds);
+        JOptionPane.showMessageDialog(frame,
+                "Game Over! You scored " + score + " out of " + totalRounds);
         frame.dispose();
     }
-    aaaaaa
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            GameGUI game = new GameGUI();
+            game.startGame();
+        });
+    }
 }

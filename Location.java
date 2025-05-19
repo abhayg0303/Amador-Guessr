@@ -1,5 +1,5 @@
-public class Location{
-private final String name;
+public class Location {
+    private final String name;
     private final String imagePath;
 
     public Location(String name, String imagePath) {
