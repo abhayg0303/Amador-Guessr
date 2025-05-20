@@ -1,7 +1,10 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.*;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Random;
 
 public class GameGUI {
     private final List<Location> locations;
@@ -46,7 +49,7 @@ public class GameGUI {
     private void loadLocations() {
         // Replace these paths with actual image paths
         locations.add(new Location("Science Building", "images/Amador-Science.jpg"));
-        locations.add(new Location("Football Field", "images/"));
+        locations.add(new Location("Football Field", "images/Football Field.jpg"));
         locations.add(new Location("Gym", "images/Gym.jpg"));
         locations.add(new Location("Quad", "images/Quad.jpg"));
         locations.add(new Location("Front Office", "images/FrontOffice.jpg"));
