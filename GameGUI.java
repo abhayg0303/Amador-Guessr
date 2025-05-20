@@ -48,11 +48,9 @@ public class GameGUI {
 
     private void loadLocations() {
         // Replace these paths with actual image paths
-        locations.add(new Location("Science Building", "images/Amador-Science.jpg"));
-        locations.add(new Location("Football Field", "images/Football Field.jpg"));
-        locations.add(new Location("Gym", "images/Gym.jpg"));
-        locations.add(new Location("Quad", "images/Quad.jpg"));
-        locations.add(new Location("Front Office", "images/FrontOffice.jpg"));
+        locations.add(new Location("Science Building", "Amador-Science.jpg"));
+        locations.add(new Location("Football Field", "Football Field.jpg"));
+        locations.add(new Location("R building", "tree behind r building.jpg")); 
     }
 
     private void nextRound() {

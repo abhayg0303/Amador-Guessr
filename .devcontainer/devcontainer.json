@@ -1,0 +1,22 @@
+{
+    "name":"java swing dev container",
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+    "features": {
+        "ghcr.io/devcontainers/features/desktop-lite:1" : {}
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": ["vscjava.vscode-java-pack"]
+        }
+    },
+    "forwardPorts": [6080],
+    "portsAttributes": {
+        "6080": {
+        "label": "desktop"
+        }
+    },
+    "postCreateCommand": "echo 'Dev container is ready!'",
+    "remoteUser": "vscode"
+}
