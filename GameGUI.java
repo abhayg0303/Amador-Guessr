@@ -11,7 +11,7 @@ public class GameGUI {
     private Location currentLocation;
     private int score = 0;
     private int round = 0;
-    private final int totalRounds = 5;
+    private final int totalRounds = 10;
     private boolean hasGuessed = false;
 
     private JFrame frame;
@@ -51,12 +51,12 @@ public class GameGUI {
         locations.add(new Location("Science Building", "Amador-Science.jpg"));
         locations.add(new Location("Football Field", "Football Field.jpg"));
         locations.add(new Location("R building", "tree behind r building.jpg"));  
-        locations.add(new Location("J building", "j building "));  
-        locations.add(new Location("Pool","pool"));  
-        locations.add(new Location("Softball","softball"));  
-        locations.add(new Location("Library","library"));  
-        locations.add(new Location("R building","r building")); 
-        locations.add(new Location("Q building", "Q building")); 
+        locations.add(new Location("J building", "j building.jpg"));  
+        locations.add(new Location("Pool","pool.jpg"));  
+        locations.add(new Location("Softball","softball.jpg"));  
+        locations.add(new Location("Library","library.jpg"));  
+        locations.add(new Location("R building","r building .jpg")); 
+        locations.add(new Location("Q building", "Q building .jpg")); 
     }
 
     private void nextRound() {
