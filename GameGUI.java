@@ -17,7 +17,10 @@ public class GameGUI {
     private JFrame frame;
     private JLabel imageLabel;
     private JPanel buttonsPanel;
-    private JLabel feedbackLabel;
+    private JLabel feedbackLabel; 
+    private JPanel imagesPanel;
+    private JLabel imageLabel1;
+    private JLabel imageLabel2;
 
     public GameGUI() {
         this.locations = new ArrayList<>();
@@ -28,22 +31,42 @@ public class GameGUI {
     public void startGame() {
         frame = new JFrame("Amador Valley GeoGuessr");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(600, 500);
-        frame.setLayout(new BorderLayout());
+        frame.setSize(900, 500);
+        frame.setLayout(new BorderLayout()); 
 
-        imageLabel = new JLabel();
-        imageLabel.setHorizontalAlignment(JLabel.CENTER);
-        frame.add(imageLabel, BorderLayout.CENTER);
+    imagesPanel = new JPanel(new GridLayout(1, 2));
+    imageLabel1 = new JLabel();
+    imageLabel1.setHorizontalAlignment(JLabel.CENTER);
+    imageLabel2 = new JLabel();
+    imageLabel2.setHorizontalAlignment(JLabel.CENTER);
+    imagesPanel.add(imageLabel1);
+    imagesPanel.add(imageLabel2);
+    frame.add(imagesPanel, BorderLayout.CENTER);
 
-        buttonsPanel = new JPanel();
-        buttonsPanel.setLayout(new GridLayout(0, 1));
-        frame.add(buttonsPanel, BorderLayout.SOUTH);
+    buttonsPanel = new JPanel();
+    buttonsPanel.setLayout(new GridLayout(0, 1));
+    frame.add(buttonsPanel, BorderLayout.SOUTH);
 
-        feedbackLabel = new JLabel(" ", SwingConstants.CENTER);
-        frame.add(feedbackLabel, BorderLayout.NORTH);
+    feedbackLabel = new JLabel(" ", SwingConstants.CENTER);
+    frame.add(feedbackLabel, BorderLayout.NORTH);
 
-        nextRound();
-        frame.setVisible(true);
+    nextRound();
+    frame.setVisible(true);
+
+        
+        //imageLabel = new JLabel();
+        // imageLabel.setHorizontalAlignment(JLabel.CENTER);
+        // frame.add(imageLabel, BorderLayout.CENTER);
+
+        // buttonsPanel = new JPanel();
+        // buttonsPanel.setLayout(new GridLayout(0, 1));
+        // frame.add(buttonsPanel, BorderLayout.SOUTH);
+
+        // feedbackLabel = new JLabel(" ", SwingConstants.CENTER);
+        // frame.add(feedbackLabel, BorderLayout.NORTH);
+
+        // nextRound();
+        // frame.setVisible(true);
     }
 
     private void loadLocations() {
@@ -69,17 +92,23 @@ public class GameGUI {
         round++;
 
         currentLocation = locations.get(new Random().nextInt(locations.size()));
-        displayImage(currentLocation.getImagePath());
+        displayImage(currentLocation.getImagePath(),null);
         setupChoices();
 
         feedbackLabel.setText("Round " + round + ": Where is this?");
     }
 
-    private void displayImage(String path) {
-        ImageIcon icon = new ImageIcon(path);
-        Image scaledImage = icon.getImage().getScaledInstance(500, 300, Image.SCALE_SMOOTH);
-        imageLabel.setIcon(new ImageIcon(scaledImage));
-        imageLabel.setCursor(Cursor.getDefaultCursor());
+    private void displayImage(String path1, String path2) {
+        ImageIcon icon = new ImageIcon(path1);
+        Image scaledImage1 = icon.getImage().getScaledInstance(400, 300, Image.SCALE_SMOOTH);
+        imageLabel1.setIcon(new ImageIcon(scaledImage1));
+         
+         ImageIcon icon2 = new ImageIcon(path2); 
+         Image scaledImage2 = icon2.getImage().getScaledInstance(400,300, Image.SCALE_SMOOTH);
+        imageLabel2.setIcon(new ImageIcon(scaledImage2)); 
+           
+        imageLabel1.setCursor(Cursor.getDefaultCursor()); 
+        imageLabel2.setCursor(Cursor.getDefaultCursor()); 
     }
 
     private void setupChoices() {
@@ -114,12 +143,12 @@ public class GameGUI {
             }
         }
 
-        imageLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        imageLabel.addMouseListener(new MouseAdapter() {
+        imageLabel1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        imageLabel1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                imageLabel.setCursor(Cursor.getDefaultCursor());
-                imageLabel.removeMouseListener(this);
+                imageLabel1.setCursor(Cursor.getDefaultCursor());
+                imageLabel1.removeMouseListener(this);
                 nextRound();
             }
         });
