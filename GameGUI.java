@@ -1,14 +1,16 @@
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Random;
+import javax.swing.*;
 
-public class GameGUI {
+public class GameGUI { 
+    
     private final List<Location> locations;
-    private Location currentLocation;
+    private Location currentLocation; 
+    private Location map = new Location("Map","Amador Map.jpg");
     private int score = 0;
     private int round = 0;
     private final int totalRounds = 10;
@@ -21,7 +23,9 @@ public class GameGUI {
     private JPanel imagesPanel;
     private JLabel imageLabel1;
     private JLabel imageLabel2;
-
+ 
+     
+    
     public GameGUI() {
         this.locations = new ArrayList<>();
         loadLocations();
@@ -71,18 +75,20 @@ public class GameGUI {
 
     private void loadLocations() {
         // Replace actual image paths
-        locations.add(new Location("Science Building", "Amador-Science.jpg"));
-        locations.add(new Location("Football Field", "Football Field.jpg"));
-        locations.add(new Location("R building", "tree behind r building.jpg"));  
-        locations.add(new Location("J building", "j building.jpg"));  
-        locations.add(new Location("Pool","pool.jpg"));  
-        locations.add(new Location("Softball","softball.jpg"));  
-        locations.add(new Location("Library","library.jpg"));  
-        locations.add(new Location("R building","r building .jpg")); 
-        locations.add(new Location("Q building", "Q building .jpg")); 
+       // locations.add(new Location("F", "AR.jpg"));
+        locations.add(new Location("B", "Football Field.jpg"));
+        locations.add(new Location("K", "tree behind r building.jpg"));  
+        locations.add(new Location("G", "j building.jpg"));  
+        locations.add(new Location("D","pool.jpg"));  
+        locations.add(new Location("E","softball.jpg"));  
+        locations.add(new Location("H","library.jpg"));  
+        locations.add(new Location("J","r building .jpg")); 
+        locations.add(new Location("C", "Q building .jpg"));  
+        //Location map = new Location("Map","Amador Map.jpg");
     }
 
-    private void nextRound() {
+    private void nextRound() { 
+
         if (round >= totalRounds) {
             showFinalScore();
             return;
@@ -90,9 +96,9 @@ public class GameGUI {
 
         hasGuessed = false;
         round++;
-
+        
         currentLocation = locations.get(new Random().nextInt(locations.size()));
-        displayImage(currentLocation.getImagePath(),null);
+        displayImage(currentLocation.getImagePath(),map.getImagePath());
         setupChoices();
 
         feedbackLabel.setText("Round " + round + ": Where is this?");
